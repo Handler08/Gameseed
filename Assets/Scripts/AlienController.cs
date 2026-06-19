@@ -16,6 +16,12 @@ public class AlienController : MonoBehaviour
     private DombaController dombaScript;
     
     private bool isPossessing = false;
+    
+    public bool IsPossessing()
+    {
+        return isPossessing;
+    }
+
     private Rigidbody rb;
     private MeshRenderer mesh;
     private Collider col;
