@@ -10,8 +10,10 @@ public class CameraController : MonoBehaviour
     public Vector3 offset = new Vector3(0, 5, -8);
     public float smoothSpeed = 5f;
 
-    [Header("Editor")]
-    [SerializeField] private Transform targetUntukSetOffset;
+    [Header("Rotation")]
+    [Tooltip("Rotasi tetap kamera (Euler). Biarkan (0,0,0) jika ingin kamera tidak dirotasi paksa.")]
+    public Vector3 cameraRotation = new Vector3(30f, 0f, 0f);
+    public bool useFixedRotation = false;
 
     private AlienController alienController;
     private Transform currentTarget;
@@ -50,6 +52,12 @@ public class CameraController : MonoBehaviour
 
         Vector3 desiredPosition = currentTarget.position + offset;
         transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+
+        // Terapkan rotasi tetap jika diaktifkan
+        if (useFixedRotation)
+        {
+            transform.rotation = Quaternion.Euler(cameraRotation);
+        }
     }
 
     void TentukanTarget()
@@ -79,14 +87,10 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    [ContextMenu("Set Offset dari Posisi Kamera Saat Ini")]
-    void SetOffsetDariPosisiKamera()
+    [ContextMenu("Set Rotation dari Posisi Kamera Saat Ini")]
+    void SetRotationDariKamera()
     {
-        if (targetUntukSetOffset == null)
-        {
-            Debug.LogWarning("Isi dulu 'Target Untuk Set Offset' di Inspector!");
-            return;
-        }
-        offset = transform.position - targetUntukSetOffset.position;
+        cameraRotation = transform.rotation.eulerAngles;
+        useFixedRotation = true;
     }
 }
