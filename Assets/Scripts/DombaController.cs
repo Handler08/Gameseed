@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class DombaController : MonoBehaviour
 {
+    [Header("Animation")]
+    public Animator animator;            // Drag Animator Controller kesini
+
     [Header("Movement (sama dengan Alien)")]
     public float speed = 5f;
     public float jumpForce = 6f;
@@ -17,6 +20,7 @@ public class DombaController : MonoBehaviour
     public float currentFlyTime;         // Sisa waktu terbang saat ini
 
     private Rigidbody rb;
+    private bool isGrounded = false;
     private Texture2D barBgTexture;
     private Texture2D barFillTexture;
 
@@ -45,14 +49,19 @@ public class DombaController : MonoBehaviour
         // Terapkan kecepatan pada sumbu X, pertahankan kecepatan Y bawaan gravitasi
         rb.linearVelocity = new Vector3(moveX * speed, rb.linearVelocity.y, 0);
 
-        // Lompat (W) - Hanya bisa lompat jika kecepatan Y hampir 0 (menyentuh tanah)
-        if (Input.GetKeyDown(KeyCode.W) && Mathf.Abs(rb.linearVelocity.y) < 0.01f)
+        // Cek apakah di tanah (grounded)
+        isGrounded = Mathf.Abs(rb.linearVelocity.y) < 0.01f;
+
+        // Lompat (W) - Hanya bisa lompat jika menyentuh tanah
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isGrounded = false;
         }
 
         // --- MEKANIK TERBANG (hanya saat dirasuki) ---
         bool menekanSpasi = Input.GetKey(KeyCode.Space);
+        bool isFlying = false;
 
         if (isPossessed && menekanSpasi && currentFlyTime > 0f)
         {
@@ -60,6 +69,7 @@ public class DombaController : MonoBehaviour
             rb.AddForce(Vector3.up * flyForce * Time.deltaTime, ForceMode.VelocityChange);
             currentFlyTime -= Time.deltaTime;
             if (currentFlyTime < 0f) currentFlyTime = 0f;
+            isFlying = true;
         }
         else if (!menekanSpasi)
         {
@@ -72,6 +82,19 @@ public class DombaController : MonoBehaviour
         if (isPossessed && rb.linearVelocity.y < 0f)
         {
             rb.AddForce(Physics.gravity * (fallMultiplier - 1f) * rb.mass, ForceMode.Force);
+        }
+
+        // --- UPDATE ANIMASI ---
+        if (animator != null)
+        {
+            bool isWalking = Mathf.Abs(moveX) > 0.01f;
+            bool isJumping = rb.linearVelocity.y > 0.1f && !isGrounded;
+
+            animator.SetBool("isWalking", isWalking);
+            animator.SetBool("isJumping", isJumping);
+            animator.SetBool("isFlying", isFlying);
+            animator.SetBool("isGrounded", isGrounded);
+            animator.SetFloat("yVelocity", rb.linearVelocity.y);
         }
     }
 

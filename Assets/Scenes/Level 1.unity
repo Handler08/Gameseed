@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 110917156}
   - component: {fileID: 110917155}
   - component: {fileID: 110917160}
+  - component: {fileID: 110917161}
   m_Layer: 0
   m_Name: Alien
   m_TagString: Untagged
@@ -308,6 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b2acbca8a4c2348a88312996aed42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 110917161}
   speed: 5
   jumpForce: 10
   interactRange: 2.5
@@ -316,6 +318,28 @@ MonoBehaviour:
   pullSpeed: 7
   cakeStopOffset: 1.2
   dombaObject: {fileID: 1345992180}
+--- !u!95 &110917161
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110917154}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2d6dfd07b9d09bb4f898c3919ac19bfd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &134999913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2087138752471932701, guid: 5306074a01044664385349c2c9dba3ca, type: 3}
@@ -1607,6 +1631,7 @@ GameObject:
   - component: {fileID: 1345992181}
   - component: {fileID: 1345992185}
   - component: {fileID: 1345992186}
+  - component: {fileID: 1345992187}
   m_Layer: 0
   m_Name: Domba
   m_TagString: Player
@@ -1744,6 +1769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1a3bc97a0af3a4393a54cfc3493bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1345992187}
   speed: 5
   jumpForce: 10
   flyForce: 15
@@ -1752,6 +1778,28 @@ MonoBehaviour:
   flyRegenRate: 0.25
   isPossessed: 0
   currentFlyTime: 0
+--- !u!95 &1345992187
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345992180}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a67d91a350c38b141aa1823102732ffc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1498196757
 PrefabInstance:
   m_ObjectHideFlags: 0

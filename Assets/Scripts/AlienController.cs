@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class AlienController : MonoBehaviour
 {
+    [Header("Animation")]
+    public Animator animator;            // Drag Animator Controller kesini
+
     public float speed = 5f;
     public float jumpForce = 6f;
     public float interactRange = 2.5f; 
@@ -25,6 +28,7 @@ public class AlienController : MonoBehaviour
     private Rigidbody rb;
     private MeshRenderer mesh;
     private Collider col;
+    private bool isGrounded = false;
 
     // Variabel untuk animasi tarik
     private bool isPullingCake = false;
@@ -49,6 +53,16 @@ public class AlienController : MonoBehaviour
         {
             transform.position = dombaObject.transform.position;
             if (Input.GetKeyDown(KeyCode.E)) KeluarDariDomba();
+
+            // Animasi saat possessing
+            if (animator != null)
+            {
+                animator.SetBool("isPossessing", true);
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isJumping", false);
+                animator.SetBool("isPulling", false);
+            }
+
             return; 
         }
 
@@ -58,9 +72,13 @@ public class AlienController : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow)) moveX = 1;
         rb.linearVelocity = new Vector3(moveX * speed, rb.linearVelocity.y, 0);
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && Mathf.Abs(rb.linearVelocity.y) < 0.01f)
+        // Cek grounded
+        isGrounded = Mathf.Abs(rb.linearVelocity.y) < 0.01f;
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isGrounded = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) MenghancurkanBeton();
@@ -86,6 +104,21 @@ public class AlienController : MonoBehaviour
             {
                 SelesaiSedot();
             }
+        }
+
+        // --- UPDATE ANIMASI ---
+        if (animator != null)
+        {
+            bool isWalking = Mathf.Abs(moveX) > 0.01f;
+            bool isJumping = rb.linearVelocity.y > 0.1f && !isGrounded;
+            bool isPulling = isPullingCake;
+
+            animator.SetBool("isWalking", isWalking);
+            animator.SetBool("isJumping", isJumping);
+            animator.SetBool("isPulling", isPulling);
+            animator.SetBool("isPossessing", false);
+            animator.SetBool("isGrounded", isGrounded);
+            animator.SetFloat("yVelocity", rb.linearVelocity.y);
         }
     }
 
