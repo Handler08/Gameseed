@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2019788588582630404}
   - component: {fileID: 8430402246410632689}
   - component: {fileID: 170522645064650596}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 3Biru
   m_TagString: Untagged
   m_Icon: {fileID: 0}

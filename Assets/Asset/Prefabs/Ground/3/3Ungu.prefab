@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6810144670897960780}
   - component: {fileID: 5741788570490107495}
   - component: {fileID: -3943991444010150279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 3Ungu
   m_TagString: Untagged
   m_Icon: {fileID: 0}

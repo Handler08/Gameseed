@@ -26,7 +26,7 @@ public class AlienController : MonoBehaviour
     }
 
     private Rigidbody rb;
-    private MeshRenderer mesh;
+    private SkinnedMeshRenderer mesh;   // Diganti dari MeshRenderer -> SkinnedMeshRenderer
     private Collider col;
     private bool isGrounded = false;
 
@@ -38,8 +38,13 @@ public class AlienController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        mesh = GetComponent<MeshRenderer>();
+        mesh = GetComponentInChildren<SkinnedMeshRenderer>(); // Cari SkinnedMeshRenderer di child, bukan cuma objek ini sendiri
         col = GetComponent<Collider>();
+
+        if (mesh == null)
+        {
+            Debug.LogWarning("SkinnedMeshRenderer tidak ditemukan di Alien atau child-nya! Cek struktur model kamu.");
+        }
         
         if (dombaObject != null)
         {
@@ -238,7 +243,7 @@ public class AlienController : MonoBehaviour
     {
         isPossessing = true;
         dombaScript.isPossessed = true;
-        mesh.enabled = false;
+        if (mesh != null) mesh.enabled = false;
         col.enabled = false;
         rb.isKinematic = true; 
     }
@@ -247,7 +252,7 @@ public class AlienController : MonoBehaviour
     {
         isPossessing = false;
         dombaScript.isPossessed = false;
-        mesh.enabled = true;
+        if (mesh != null) mesh.enabled = true;
         col.enabled = true;
         rb.isKinematic = false;
         transform.position = dombaObject.transform.position + new Vector3(0, 1.5f, 0);

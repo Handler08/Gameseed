@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3318483444547474057}
   - component: {fileID: 7971710235655565037}
   - component: {fileID: 8228044208326583883}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 3Hijau (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 2383305964846335033}
   - component: {fileID: 6817538876325980096}
   - component: {fileID: 962045477480030045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 3Hijau (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 716196126300873536}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 6Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}

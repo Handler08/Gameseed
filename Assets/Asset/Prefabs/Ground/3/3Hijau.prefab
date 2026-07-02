@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7701005475912083443}
   - component: {fileID: 855395187162894112}
   - component: {fileID: 1197731824819860256}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 3Hijau
   m_TagString: Untagged
   m_Icon: {fileID: 0}
