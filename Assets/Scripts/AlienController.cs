@@ -75,6 +75,13 @@ public class AlienController : MonoBehaviour
         float moveX = 0;
         if (Input.GetKey(KeyCode.LeftArrow)) moveX = -1;
         if (Input.GetKey(KeyCode.RightArrow)) moveX = 1;
+
+        // Balik arah hadap sesuai pergerakan
+        if (moveX > 0f)
+            transform.rotation = Quaternion.Euler(0f, -270f, 0f);
+        else if (moveX < 0f)
+            transform.rotation = Quaternion.Euler(0f, 270f, 0f);
+
         rb.linearVelocity = new Vector3(moveX * speed, rb.linearVelocity.y, 0);
 
         // Cek grounded
@@ -92,7 +99,11 @@ public class AlienController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Vector3.Distance(transform.position, dombaObject.transform.position) <= interactRange)
+            if (dombaObject == null)
+            {
+                Debug.LogError("Tombol E ditekan tapi 'dombaObject' tidak di-assign di Inspector Alien!");
+            }
+            else if (Vector3.Distance(transform.position, dombaObject.transform.position) <= interactRange)
             {
                 MerasukiDomba();
             }
@@ -241,6 +252,12 @@ public class AlienController : MonoBehaviour
 
     void MerasukiDomba()
     {
+        if (dombaScript == null)
+        {
+            Debug.LogError("MerasukiDomba gagal: dombaScript null. Pastikan 'dombaObject' terisi dan punya komponen DombaController!");
+            return;
+        }
+
         isPossessing = true;
         dombaScript.isPossessed = true;
         if (mesh != null) mesh.enabled = false;

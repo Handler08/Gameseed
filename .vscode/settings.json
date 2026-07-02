@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Gameseed.slnx",
+    "dotnet.defaultSolution": "Project.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }

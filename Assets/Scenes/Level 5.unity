@@ -2449,8 +2449,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a1c85d5aed0364ab99ead0834f4203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alienTransform: {fileID: 1208536086}
-  dombaTransform: {fileID: 528446128}
+  alienTransform: {fileID: 675286551}
+  dombaTransform: {fileID: 458290293}
   offset: {x: 0, y: 1.5, z: -10}
   smoothSpeed: 5
   cameraRotation: {x: 8, y: 0, z: 0}
@@ -3025,7 +3025,7 @@ GameObject:
   - component: {fileID: 458290289}
   m_Layer: 0
   m_Name: Dombaaa
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4843,6 +4843,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d139c0ccb8f4b3044a25c7e00891bd5d, type: 3}
       propertyPath: m_Name
       value: SheepyWalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d139c0ccb8f4b3044a25c7e00891bd5d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

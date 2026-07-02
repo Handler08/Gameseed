@@ -46,6 +46,12 @@ public class DombaController : MonoBehaviour
         if (Input.GetKey(KeyCode.A)) moveX = -1;
         if (Input.GetKey(KeyCode.D)) moveX = 1;
 
+        // Balik arah hadap sesuai pergerakan
+        if (moveX > 0f)
+            transform.rotation = Quaternion.Euler(0f, -270f, 0f);
+        else if (moveX < 0f)
+            transform.rotation = Quaternion.Euler(0f, 270f, 0f);
+
         // Terapkan kecepatan pada sumbu X, pertahankan kecepatan Y bawaan gravitasi
         rb.linearVelocity = new Vector3(moveX * speed, rb.linearVelocity.y, 0);
 
