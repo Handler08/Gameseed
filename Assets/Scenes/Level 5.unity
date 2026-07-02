@@ -4806,7 +4806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d139c0ccb8f4b3044a25c7e00891bd5d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.033
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d139c0ccb8f4b3044a25c7e00891bd5d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4890,6 +4890,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1208536086}
+  - {fileID: 1345992184}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!54 &675286552
@@ -4939,7 +4940,7 @@ MonoBehaviour:
   wallCheckDistance: 2.5
   pullSpeed: 7
   cakeStopOffset: 1.2
-  dombaObject: {fileID: 1345992180}
+  dombaObject: {fileID: 458290288}
 --- !u!136 &675286554
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9999,12 +10000,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345992180}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.82, y: 106.47, z: -6.04}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.039999727, y: 1, z: -2.8200002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 675286551}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1345992185
 Rigidbody:
@@ -14888,7 +14889,6 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 1345992184}
   - {fileID: 812197626}
   - {fileID: 110917159}
   - {fileID: 513583834}
