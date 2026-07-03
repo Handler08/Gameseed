@@ -14,6 +14,11 @@ public class AlienController : MonoBehaviour
     public float wallCheckDistance = 2.5f; // Jarak maksimal Alien dengan tembok besi
     public float pullSpeed = 7f;           // Kecepatan kue melayang ke arah Alien
     public float cakeStopOffset = 1.2f;    // Jarak berhentinya kue di samping (kiri/kanan) Alien
+
+    [Header("Ground Detection")]
+    public Transform groundCheck;     // Titik pusat sensor di telapak kaki
+    public float groundDistance = 0.2f; // Jari-jari sensor
+    public LayerMask groundMask;      // Filter khusus untuk objek lantai
     
     public GameObject dombaObject; 
     private DombaController dombaScript;
@@ -34,6 +39,9 @@ public class AlienController : MonoBehaviour
     private bool isPullingCake = false;
     private GameObject targetCake;
     private Vector3 pullDestination;
+
+    // Flag jump berbasis STATE (bukan threshold kecepatan), supaya sinkron dengan animasi
+    private bool isJumping = false;
 
     void Start()
     {
@@ -84,13 +92,20 @@ public class AlienController : MonoBehaviour
 
         rb.linearVelocity = new Vector3(moveX * speed, rb.linearVelocity.y, 0);
 
-        // Cek grounded
-        isGrounded = Mathf.Abs(rb.linearVelocity.y) < 0.01f;
+        // Cek grounded di Update supaya hasilnya langsung dipakai di frame yang sama
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
+            isJumping = true; // langsung ON di frame yang sama saat AddForce dipanggil
+        }
+
+        // Matikan isJumping HANYA saat benar-benar sudah mendarat
+        if (isGrounded && rb.linearVelocity.y <= 0.05f)
+        {
+            isJumping = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) MenghancurkanBeton();
@@ -99,11 +114,7 @@ public class AlienController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (dombaObject == null)
-            {
-                Debug.LogError("Tombol E ditekan tapi 'dombaObject' tidak di-assign di Inspector Alien!");
-            }
-            else if (Vector3.Distance(transform.position, dombaObject.transform.position) <= interactRange)
+            if (Vector3.Distance(transform.position, dombaObject.transform.position) <= interactRange)
             {
                 MerasukiDomba();
             }
@@ -126,11 +137,10 @@ public class AlienController : MonoBehaviour
         if (animator != null)
         {
             bool isWalking = Mathf.Abs(moveX) > 0.01f;
-            bool isJumping = rb.linearVelocity.y > 0.1f && !isGrounded;
             bool isPulling = isPullingCake;
 
             animator.SetBool("isWalking", isWalking);
-            animator.SetBool("isJumping", isJumping);
+            animator.SetBool("isJumping", isJumping); // sekarang berbasis state, bukan threshold yVelocity
             animator.SetBool("isPulling", isPulling);
             animator.SetBool("isPossessing", false);
             animator.SetBool("isGrounded", isGrounded);
@@ -252,12 +262,6 @@ public class AlienController : MonoBehaviour
 
     void MerasukiDomba()
     {
-        if (dombaScript == null)
-        {
-            Debug.LogError("MerasukiDomba gagal: dombaScript null. Pastikan 'dombaObject' terisi dan punya komponen DombaController!");
-            return;
-        }
-
         isPossessing = true;
         dombaScript.isPossessed = true;
         if (mesh != null) mesh.enabled = false;
@@ -274,4 +278,14 @@ public class AlienController : MonoBehaviour
         rb.isKinematic = false;
         transform.position = dombaObject.transform.position + new Vector3(0, 1.5f, 0);
     }
+
+    void OnDrawGizmosSelected()
+{
+    if (groundCheck != null)
+    {
+        // Akan menggambar garis bola merah di posisi GroundCheck
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
+    }
+}
 }

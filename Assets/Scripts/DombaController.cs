@@ -16,6 +16,12 @@ public class DombaController : MonoBehaviour
     public float flyRegenRate = 3f;      // Kecepatan regen per detik
     public bool isPossessed = false;     // Status apakah sedang dirasuki Alien
 
+    [Header("Ground Detection")]
+    public Transform groundCheck;     // Titik pusat sensor di telapak kaki
+    public float groundDistance = 0.2f; // Jari-jari sensor
+    public LayerMask groundMask;      // Filter khusus untuk objek lantai
+    
+
     [HideInInspector]
     public float currentFlyTime;         // Sisa waktu terbang saat ini
 
@@ -94,7 +100,7 @@ public class DombaController : MonoBehaviour
         if (animator != null)
         {
             bool isWalking = Mathf.Abs(moveX) > 0.01f;
-            bool isJumping = rb.linearVelocity.y > 0.1f && !isGrounded;
+            bool isJumping = rb.linearVelocity.y > 2.0f && !isGrounded;
 
             animator.SetBool("isWalking", isWalking);
             animator.SetBool("isJumping", isJumping);

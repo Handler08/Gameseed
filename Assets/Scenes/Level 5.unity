@@ -686,6 +686,11 @@ MonoBehaviour:
   wallCheckDistance: 2.5
   pullSpeed: 7
   cakeStopOffset: 1.2
+  groundCheck: {fileID: 0}
+  groundDistance: 0.2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   dombaObject: {fileID: 1345992180}
 --- !u!1001 &128846337
 PrefabInstance:
@@ -3050,6 +3055,11 @@ MonoBehaviour:
   maxFlyTime: 10
   flyRegenRate: 3
   isPossessed: 0
+  groundCheck: {fileID: 2019372071}
+  groundDistance: 0.2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   currentFlyTime: 0
 --- !u!33 &458290290
 MeshFilter:
@@ -3123,6 +3133,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 528446128}
+  - {fileID: 2019372071}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &479608259
@@ -3258,7 +3269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 495548830}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 9Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3665,7 +3676,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a67d91a350c38b141aa1823102732ffc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -4891,6 +4902,7 @@ Transform:
   m_Children:
   - {fileID: 1208536086}
   - {fileID: 1345992184}
+  - {fileID: 798256944}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!54 &675286552
@@ -4940,6 +4952,11 @@ MonoBehaviour:
   wallCheckDistance: 2.5
   pullSpeed: 7
   cakeStopOffset: 1.2
+  groundCheck: {fileID: 798256944}
+  groundDistance: 0.2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
   dombaObject: {fileID: 458290288}
 --- !u!136 &675286554
 CapsuleCollider:
@@ -5592,6 +5609,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7457521977605707609, guid: 883b0aab5c3fa394db7d10631cabc0a9, type: 3}
   m_PrefabInstance: {fileID: 785018429}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &798256943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 798256944}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &798256944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798256943}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 675286551}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &803010032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10054,6 +10102,11 @@ MonoBehaviour:
   maxFlyTime: 5
   flyRegenRate: 0.25
   isPossessed: 0
+  groundCheck: {fileID: 0}
+  groundDistance: 0.2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   currentFlyTime: 0
 --- !u!1001 &1366416354
 PrefabInstance:
@@ -12303,6 +12356,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 2d6dfd07b9d09bb4f898c3919ac19bfd, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 987c994b99f21f24588e3352f4b90879, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6152400788126111112, guid: 987c994b99f21f24588e3352f4b90879, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -26.744282
@@ -14262,6 +14319,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5195400329142642927, guid: 38b5332769afd2d4ba72d5b5ed8c7f0c, type: 3}
   m_PrefabInstance: {fileID: 2012665681}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2019372070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2019372071}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2019372071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019372070}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 458290293}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2041415435
 PrefabInstance:
   m_ObjectHideFlags: 0
